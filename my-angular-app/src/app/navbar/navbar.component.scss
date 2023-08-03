@@ -1,0 +1,29 @@
+nav {
+    background: linear-gradient(90deg, #6c63ff 0%, #3a7bfd 100%);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+    a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+  
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+  
+      &.active {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+  

@@ -1,0 +1,58 @@
+<div class="filter-row">
+  <select [(ngModel)]="itemsPerPage" (change)="setPage({ offset: 0 })">
+    <option value="10">10 Items per Page</option>
+    <option value="25">25 Items per Page</option>
+    <option value="50">50 Items per Page</option>
+    <option value="100">100 Items per Page</option>
+    <option value="250">250 Items per Page</option>
+  </select>
+  <select [(ngModel)]="selectedColumn" (change)="updateFilter(filterInput.value)">
+    <option value="" disabled>Select Column</option>
+    <option *ngFor="let column of columns" [value]="column.prop">{{ column.name }}</option>
+  </select>
+  <input
+    #filterInput
+    type="text"
+    placeholder="Filter..."
+    [disabled]="!selectedColumn"
+    (keyup)="updateFilter(filterInput.value)"
+  />
+</div>
+
+<div class="column-selector">
+  <label for="column-dropdown">Columns:</label>
+  <div id="column-dropdown" class="dropdown">
+    <button (click)="toggleDropdown()" class="dropbtn">Select Columns</button>
+    <div [class.show]="showDropdown" class="dropdown-content">
+      <label *ngFor="let column of allColumns" class="column-option">
+        <input type="checkbox" [(ngModel)]="column.checked" />
+        {{ column.name }}
+      </label>
+      <button (click)="applyColumns()">Apply</button>
+    </div>
+  </div>
+</div>
+  
+<ngx-datatable
+  class="material"
+  [rows]="rows"
+  [columns]="columns"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [limit]="itemsPerPage"
+  [externalPaging]="true"
+  [count]="totalItems" 
+  [offset]="page"
+  (page)='setPage($event)'>
+  <datatable-pager
+    [pagerLeftArrowIcon]="'datatable-icon-left'"
+    [pagerRightArrowIcon]="'datatable-icon-right'"
+    [pagerPreviousIcon]="'datatable-icon-prev'"
+    [pagerNextIcon]="'datatable-icon-skip'"
+    (change)="setPage($event)">
+  </datatable-pager>
+</ngx-datatable>
+
+
